@@ -336,41 +336,38 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
         <fieldset>
           <legend>Your contact info</legend>
           <div class="row2">
-            <label for="f-first">First name <span class="req">*</span><input id="f-first" name="first" autocomplete="given-name" required></label>
-            <label for="f-last">Last name <span class="req">*</span><input id="f-last" name="last" autocomplete="family-name" required></label>
+            <label for="f-first"><span>First name <span class="req">*</span></span><input id="f-first" name="first" autocomplete="given-name" required></label>
+            <label for="f-last"><span>Last name <span class="req">*</span></span><input id="f-last" name="last" autocomplete="family-name" required></label>
           </div>
           <div class="row2">
-            <label for="f-email">Email <span class="req">*</span><input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
-            <label for="f-phone">Phone <span class="req">*</span><input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="(214) 555-0142"></label>
+            <label for="f-email"><span>Email <span class="req">*</span></span><input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+            <label for="f-phone"><span>Phone <span class="req">*</span></span><input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="(214) 555-0142"></label>
           </div>
-          <label for="f-contact">Best way to reach you <span class="opt">(optional)</span>
+          <label for="f-contact"><span>Best way to reach you <span class="opt">(optional)</span></span>
             <select id="f-contact" name="contact"><option value="">No preference</option><option>Call</option><option>Text</option><option>Email</option></select>
           </label>
         </fieldset>
 
         <fieldset>
           <legend>About the property<small>All optional. Share what you know.</small></legend>
-          <label for="f-address">Property address<input id="f-address" name="address" autocomplete="street-address" placeholder="Street, city, ZIP"></label>
+          <label for="f-address"><span>Property address</span><input id="f-address" name="address" autocomplete="street-address" placeholder="Street, city, ZIP"></label>
           <div class="row2">
-            <label for="f-type">Property type
-              <select id="f-type" name="type"><option value="">Select</option><option>Single-family home</option><option>Condo</option><option>Townhome</option><option>Duplex / small multifamily</option><option>Other</option></select>
+            <label for="f-type"><span>Property type</span><select id="f-type" name="type"><option value="">Select</option><option>Single-family home</option><option>Condo</option><option>Townhome</option><option>Duplex / small multifamily</option><option>Other</option></select>
             </label>
-            <label for="f-rental">Rental type of interest
-              <select id="f-rental" name="rental"><option value="">Not sure yet</option><option>Long-term (12+ months)</option><option>Furnished mid-term (30+ nights)</option><option>Short-term (nightly)</option></select>
+            <label for="f-rental"><span>Rental type of interest</span><select id="f-rental" name="rental"><option value="">Not sure yet</option><option>Long-term (12+ months)</option><option>Furnished mid-term (30+ nights)</option><option>Short-term (nightly)</option></select>
             </label>
           </div>
           <div class="row3">
-            <label for="f-beds">Bedrooms<input id="f-beds" name="beds" inputmode="numeric" placeholder="3"></label>
-            <label for="f-baths">Bathrooms<input id="f-baths" name="baths" inputmode="decimal" placeholder="2"></label>
-            <label for="f-sqft">Square feet<input id="f-sqft" name="sqft" inputmode="numeric" placeholder="1,450"></label>
+            <label for="f-beds"><span>Bedrooms</span><input id="f-beds" name="beds" inputmode="numeric" placeholder="3"></label>
+            <label for="f-baths"><span>Bathrooms</span><input id="f-baths" name="baths" inputmode="decimal" placeholder="2"></label>
+            <label for="f-sqft"><span>Square feet</span><input id="f-sqft" name="sqft" inputmode="numeric" placeholder="1,450"></label>
           </div>
           <div class="row2">
-            <label for="f-status">Current status
-              <select id="f-status" name="status"><option value="">Select</option><option>Vacant</option><option>Owner-occupied</option><option>Tenant-occupied</option><option>Under renovation</option></select>
+            <label for="f-status"><span>Current status</span><select id="f-status" name="status"><option value="">Select</option><option>Vacant</option><option>Owner-occupied</option><option>Tenant-occupied</option><option>Under renovation</option></select>
             </label>
-            <label for="f-date">When could it be available?<input id="f-date" name="available" type="date"></label>
+            <label for="f-date"><span>When could it be available?</span><input id="f-date" name="available" type="date"></label>
           </div>
-          <label for="f-notes">Anything else we should know?<textarea id="f-notes" name="notes" placeholder="Recent updates, HOA, pets allowed, parking, questions for Kohl…"></textarea></label>
+          <label for="f-notes"><span>Anything else we should know?</span><textarea id="f-notes" name="notes" placeholder="Recent updates, HOA, pets allowed, parking, questions for Kohl…"></textarea></label>
         </fieldset>
 
         <label class="consent" for="f-consent"><input type="checkbox" id="f-consent" name="consent" checked> It's okay for Klaus Property Group to contact me by phone, text or email about my property.</label>
