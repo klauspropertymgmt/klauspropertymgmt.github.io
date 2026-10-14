@@ -270,7 +270,8 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
           <label for="e-address">Property address<input id="e-address" name="address" autocomplete="street-address" placeholder="4100 Lemmon Ave, Dallas, TX"></label>
           <label for="e-name">Your name<input id="e-name" name="name" autocomplete="name" placeholder="Jordan Avery"></label>
           <label for="e-email">Email<input id="e-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
-          <button class="btn" type="submit">Get my rental analysis</button>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <button class="btn" type="submit" id="e-submit">Get my rental analysis</button>
           <p class="fine" id="e-note">No cost and no obligation.</p>
           <div class="result" id="e-result" hidden><pre id="e-text"></pre><button class="copy-btn" type="button" data-copy-target="e-text" style="justify-self:start">Copy message</button></div>
         </form>
@@ -472,14 +473,24 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
       try{navigator.clipboard.writeText(t.textContent.trim()).then(function(){btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1500)},function(){fallback(btn,t)})}catch(e){fallback(btn,t)}
     });
   });
-  var f=document.getElementById("estimate-form"),note=document.getElementById("e-note");
+  var f=document.getElementById("estimate-form"),note=document.getElementById("e-note"),sub=document.getElementById("e-submit");
+  var INBOX="klauspropertymgmt@gmail.com";
+  function showCopy(a,n,m){
+    note.textContent="We couldn't send that just now. Copy this and text or email it to 337-794-9971 / "+INBOX+".";
+    document.getElementById("e-text").textContent="Rental analysis request\nProperty: "+a+"\nName: "+n+"\nEmail: "+m;
+    document.getElementById("e-result").hidden=false;
+  }
   f.addEventListener("submit",function(e){
     e.preventDefault();
     var a=f.address.value.trim(),n=f.name.value.trim(),m=f.email.value.trim();
     if(!a||!n||!/^\S+@\S+\.\S+$/.test(m)){note.textContent="Add the address, your name and a valid email.";(!a?f.address:!n?f.name:f.email).focus();return;}
-    note.textContent="Online sending is coming soon. Copy this and text or email it to 337-794-9971 / klauspropertymgmt@gmail.com.";
-    document.getElementById("e-text").textContent="Rental analysis request\nProperty: "+a+"\nName: "+n+"\nEmail: "+m;
-    document.getElementById("e-result").hidden=false;
+    if(f._honey.value){note.textContent="Thanks! We'll be in touch within one business day.";return;}
+    sub.disabled=true;sub.textContent="Sending…";note.textContent="";
+    fetch("https://formsubmit.co/ajax/"+INBOX,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({_subject:"New rental analysis request: "+a,_template:"table",_replyto:m,Property:a,Name:n,Email:m,Source:"klauspropertymgmt.github.io"})})
+    .then(function(r){return r.json().then(function(j){if(!r.ok||String(j.success)==="false")throw new Error(j.message||"Send failed");});})
+    .then(function(){f.reset();sub.textContent="Request sent";note.textContent="Thanks, "+n.split(" ")[0]+"! We'll send your rental analysis within one business day.";})
+    .catch(function(){sub.disabled=false;sub.textContent="Get my rental analysis";showCopy(a,n,m);});
   });
 })();
 </script>
