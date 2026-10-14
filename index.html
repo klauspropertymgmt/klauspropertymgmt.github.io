@@ -250,6 +250,16 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
 .kchat-foot{font-size:11.5px;color:var(--muted);text-align:center;padding:0 12px 10px;background:var(--card)}
 @media (max-width:520px){.kchat{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;border-radius:0;border:0;padding-bottom:env(safe-area-inset-bottom,0px)}.kchat-btn span{display:none}.kchat-btn{padding:14px}}
 @media (prefers-reduced-motion:reduce){.ktyping i{animation:none}}
+/* form confirmation popup */
+.kmodal{position:fixed;inset:0;z-index:80;background:rgba(10,18,14,.55);display:grid;place-items:center;padding:16px}
+.kmodal-card{background:var(--card);color:var(--ink);border-radius:16px;max-width:420px;width:100%;padding:28px 26px;box-shadow:0 30px 70px -20px rgba(0,0,0,.5);text-align:center}
+.kmodal-check{width:56px;height:56px;border-radius:50%;background:var(--clay-soft);color:var(--clay);display:grid;place-items:center;margin:0 auto 14px}
+.kmodal-card h3{font-size:22px;margin:0}
+.kmodal-card p{color:var(--muted);margin-top:8px;font-size:15.5px}
+.kmodal-card dl{text-align:left;background:var(--sand);border-radius:12px;padding:14px 16px;margin:18px 0 20px;display:grid;gap:8px;font-size:15px}
+.kmodal-card dt{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.kmodal-card dd{margin:0;overflow-wrap:anywhere}
+.kmodal-card .btn{width:100%}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
 </head>
@@ -495,6 +505,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
 </footer>
 
 
+<div class="kmodal" id="kmodal" role="dialog" aria-modal="true" aria-labelledby="kmodal-title" hidden><div class="kmodal-card"><div class="kmodal-check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></div><h3 id="kmodal-title">Request sent</h3><p id="kmodal-sub">Kohl will send your rental analysis within one business day.</p><dl id="kmodal-dl"></dl><button class="btn" type="button" id="kmodal-close">Done</button></div></div>
 <script>
 (function(){
   function fallback(btn,t){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Selected — press Copy";}
@@ -504,6 +515,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
       try{navigator.clipboard.writeText(t.textContent.trim()).then(function(){btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1500)},function(){fallback(btn,t)})}catch(e){fallback(btn,t)}
     });
   });
+  var md=document.getElementById("kmodal");function mclose(){md.hidden=true}document.getElementById("kmodal-close").addEventListener("click",mclose);md.addEventListener("click",function(e){if(e.target===md)mclose()});document.addEventListener("keydown",function(e){if(e.key==="Escape")mclose()});
   var f=document.getElementById("estimate-form"),note=document.getElementById("e-note"),sub=document.getElementById("e-submit");
   var INBOX="klauspropertymgmt@gmail.com";
   function showCopy(a,n,m){
@@ -520,8 +532,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
     fetch("https://formsubmit.co/ajax/f9c197508c0e4ee2ca973c2076cc34b1",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
       body:JSON.stringify({_subject:"New rental analysis request: "+a,_template:"table",_replyto:m,Property:a,Name:n,Email:m,Source:"klauspropertymgmt.github.io"})})
     .then(function(r){return r.json().then(function(j){if(!r.ok||String(j.success)==="false")throw new Error(j.message||"Send failed");});})
-    .then(function(){f.reset();sub.textContent="Request sent";note.textContent="Thanks, "+n.split(" ")[0]+"! We'll send your rental analysis within one business day.";})
-    .catch(function(){sub.disabled=false;sub.textContent="Get my rental analysis";showCopy(a,n,m);});
+    .then(function(){var data=[["Property",a],["Name",n],["Email",m]];var dl=document.getElementById("kmodal-dl");dl.innerHTML="";data.forEach(function(p){var dt=document.createElement("dt");dt.textContent=p[0];var dd=document.createElement("dd");dd.textContent=p[1];dl.appendChild(dt);dl.appendChild(dd)});document.getElementById("kmodal-title").textContent="Thanks, "+n.split(" ")[0]+"! Your request was sent";f.reset();document.getElementById("e-result").hidden=true;sub.disabled=false;sub.textContent="Get my rental analysis";note.textContent="No cost and no obligation.";var md=document.getElementById("kmodal");md.hidden=false;document.getElementById("kmodal-close").focus();}).catch(function(){sub.disabled=false;sub.textContent="Get my rental analysis";showCopy(a,n,m);});
   });
 })();
 </script>
@@ -536,7 +547,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
 <script>
 (function(){
   var API="https://kpg-assistant.klauspropertymgmt.workers.dev/";
-  var GREETING="Hi! I'm KPG's virtual assistant. I can answer questions about our property management, run quick rental comps for your home, help renters, or log a maintenance request. What can I help with?";
+  var GREETING="Hi! I'm KPG's virtual assistant. I can answer questions about our property management, give you a quick rent range for your home, help renters, or log a maintenance request. What can I help with?";
   var CHIPS=["What could my home rent for?","Tell me about your management services","I'm looking for a rental","I need to report a maintenance issue"];
   var btn=document.getElementById("kchat-open"),box=document.getElementById("kchat"),log=document.getElementById("kchat-log"),form=document.getElementById("kchat-form"),input=document.getElementById("kchat-input"),send=document.getElementById("kchat-send");
   var history=[],busy=false,started=false;
