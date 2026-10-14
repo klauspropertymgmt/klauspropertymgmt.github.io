@@ -286,7 +286,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
       <a href="#process">How it works</a>
       <a href="#residents">Residents</a>
       <a href="#faq">FAQ</a>
-      <a class="btn" href="#estimate">Free rent estimate</a>
+      <a class="btn" href="estimate.html">Free rent estimate</a>
     </nav>
   </div>
 </header>
@@ -299,7 +299,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
         <h1>Your Dallas rental, fully managed by a local team.</h1>
         <p class="lede">Long-term leases, furnished mid-term stays and short-term rentals. We find the right resident, care for the home, and keep you informed every month.</p>
         <div class="cta-row">
-          <a class="btn" href="#estimate">Get a free rent estimate</a>
+          <a class="btn" href="estimate.html">Get a free rent estimate</a>
           <a class="btn light" href="#residents">Looking to rent?</a>
         </div>
       </div>
@@ -307,14 +307,10 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
       <div class="lead" id="estimate">
         <h2>What could your home rent for?</h2>
         <p>Get a free rental analysis for your Dallas-area property.</p>
-        <form id="estimate-form" novalidate>
-          <label for="e-address">Property address<input id="e-address" name="address" autocomplete="street-address" placeholder="4100 Lemmon Ave, Dallas, TX"></label>
-          <label for="e-name">Your name<input id="e-name" name="name" autocomplete="name" placeholder="Jordan Avery"></label>
-          <label for="e-email">Email<input id="e-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"></label>
-          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-          <button class="btn" type="submit" id="e-submit">Get my rental analysis</button>
-          <p class="fine" id="e-note">No cost and no obligation.</p>
-          <div class="result" id="e-result" hidden><pre id="e-text"></pre><button class="copy-btn" type="button" data-copy-target="e-text" style="justify-self:start">Copy message</button></div>
+        <form id="start-form" novalidate>
+          <label for="s-address">Property address <span style="font-weight:400;color:var(--muted)">(optional)</span><input id="s-address" name="address" autocomplete="street-address" placeholder="4100 Lemmon Ave, Dallas, TX"></label>
+          <button class="btn" type="submit">Start my free estimate</button>
+          <p class="fine">Takes about a minute. No cost and no obligation.</p>
         </form>
       </div>
     </div>
@@ -340,7 +336,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
           <h3>Rent out your property</h3>
           <p>Full-service management for condos, single-family homes and small multifamily across Dallas.</p>
-          <a class="more" href="#estimate">Get a rent estimate →</a>
+          <a class="more" href="estimate.html">Get a rent estimate →</a>
         </article>
         <article class="path">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
@@ -478,7 +474,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
             <div class="line"><div><small>Call or text</small><b id="phone">337-794-9971</b></div><button class="copy-btn" type="button" data-copy-target="phone">Copy</button></div>
             <div class="line"><div><small>Email</small><b id="email">klauspropertymgmt@gmail.com</b></div><button class="copy-btn" type="button" data-copy-target="email">Copy</button></div>
           </div>
-          <a class="btn" href="#estimate" style="align-self:flex-start;margin-top:6px">Get a free rent estimate</a>
+          <a class="btn" href="estimate.html" style="align-self:flex-start;margin-top:6px">Get a free rent estimate</a>
         </div>
         <div class="door" role="img" aria-label="Front door of a home"></div>
       </div>
@@ -493,7 +489,7 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
         <a class="logo" href="#top"><span class="mono">KPG</span><span class="nm">Klaus Property Group<small>Property Management</small></span></a>
         <p style="margin-top:14px;max-width:24em">Klaus Property Group, LLC manages long-term, mid-term and short-term rentals across Dallas, Texas.</p>
       </div>
-      <div><h4>Owners</h4><ul><li><a href="#services">Services</a></li><li><a href="#process">How it works</a></li><li><a href="#estimate">Free rent estimate</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Owners</h4><ul><li><a href="#services">Services</a></li><li><a href="#process">How it works</a></li><li><a href="estimate.html">Free rent estimate</a></li><li><a href="#faq">FAQ</a></li></ul></div>
       <div><h4>Residents</h4><ul><li><a href="#residents">Available rentals</a></li><li><a href="#residents">Pay rent</a></li><li><a href="#residents">Maintenance</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>337-794-9971</li><li>klauspropertymgmt@gmail.com</li><li>Dallas, Texas</li></ul></div>
     </div>
@@ -516,24 +512,8 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
     });
   });
   var md=document.getElementById("kmodal");function mclose(){md.hidden=true}document.getElementById("kmodal-close").addEventListener("click",mclose);md.addEventListener("click",function(e){if(e.target===md)mclose()});document.addEventListener("keydown",function(e){if(e.key==="Escape")mclose()});
-  var f=document.getElementById("estimate-form"),note=document.getElementById("e-note"),sub=document.getElementById("e-submit");
-  var INBOX="klauspropertymgmt@gmail.com";
-  function showCopy(a,n,m){
-    note.textContent="We couldn't send that just now. Copy this and text or email it to 337-794-9971 / "+INBOX+".";
-    document.getElementById("e-text").textContent="Rental analysis request\nProperty: "+a+"\nName: "+n+"\nEmail: "+m;
-    document.getElementById("e-result").hidden=false;
-  }
-  f.addEventListener("submit",function(e){
-    e.preventDefault();
-    var a=f.address.value.trim(),n=f.name.value.trim(),m=f.email.value.trim();
-    if(!a||!n||!/^\S+@\S+\.\S+$/.test(m)){note.textContent="Add the address, your name and a valid email.";(!a?f.address:!n?f.name:f.email).focus();return;}
-    if(f._honey.value){note.textContent="Thanks! We'll be in touch within one business day.";return;}
-    sub.disabled=true;sub.textContent="Sending…";note.textContent="";
-    fetch("https://formsubmit.co/ajax/f9c197508c0e4ee2ca973c2076cc34b1",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body:JSON.stringify({_subject:"New rental analysis request: "+a,_template:"table",_replyto:m,Property:a,Name:n,Email:m,Source:"klauspropertymgmt.github.io"})})
-    .then(function(r){return r.json().then(function(j){if(!r.ok||String(j.success)==="false")throw new Error(j.message||"Send failed");});})
-    .then(function(){var data=[["Property",a],["Name",n],["Email",m]];var dl=document.getElementById("kmodal-dl");dl.innerHTML="";data.forEach(function(p){var dt=document.createElement("dt");dt.textContent=p[0];var dd=document.createElement("dd");dd.textContent=p[1];dl.appendChild(dt);dl.appendChild(dd)});document.getElementById("kmodal-title").textContent="Thanks, "+n.split(" ")[0]+"! Your request was sent";f.reset();document.getElementById("e-result").hidden=true;sub.disabled=false;sub.textContent="Get my rental analysis";note.textContent="No cost and no obligation.";var md=document.getElementById("kmodal");md.hidden=false;document.getElementById("kmodal-close").focus();}).catch(function(){sub.disabled=false;sub.textContent="Get my rental analysis";showCopy(a,n,m);});
-  });
+  var sf=document.getElementById("start-form");
+  sf.addEventListener("submit",function(e){e.preventDefault();var v=sf.address.value.trim();location.href="estimate.html"+(v?"?address="+encodeURIComponent(v):"");});
 })();
 </script>
 
@@ -578,7 +558,6 @@ footer a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
   form.addEventListener("submit",function(e){e.preventDefault();var v=input.value;input.value="";input.style.height="";ask(v)});
   input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
   input.addEventListener("input",function(){input.style.height="auto";input.style.height=Math.min(input.scrollHeight,120)+"px"});
-  document.querySelectorAll('a[href="#estimate"]').forEach(function(){});
 })();
 </script>
 </body>
